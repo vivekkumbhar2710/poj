@@ -3,6 +3,21 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.contacts.doctype.address.address import render_address
+
+def get_default_address(Doctype, Name):
+	addresses = frappe.get_all(
+		"Address",
+		filters=[
+			["Dynamic Link", "link_doctype", "=", Doctype],
+			["Dynamic Link", "link_name", "=", Name],
+			["disabled", "=", 0],
+		],
+		pluck="name",
+		order_by="is_primary_address DESC",
+		limit=1,
+	)
+	return addresses[0] if addresses else None
 
 def getVal(val):
 	return val if val is not None else 0
@@ -19,6 +34,17 @@ def ItemWeight(item_code):
 
 
 class Subcontracting(Document):
+	@frappe.whitelist()
+	def get_address(self, Doctype, DocName):
+		ret = frappe._dict()
+		if DocName:
+			address_name = get_default_address(Doctype, DocName)
+			if address_name:
+				ret.address_display = render_address(address_name, check_permissions=False)
+				return address_name, ret.address_display
+			else:
+				frappe.msgprint(f"Plz Set Address For {DocName}")
+				
 	@frappe.whitelist()
 	def before_save(self):
 		if self.in_or_out == 'OUT':

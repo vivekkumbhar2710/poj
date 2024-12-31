@@ -22,25 +22,44 @@ frappe.ui.form.on("Subcontracting", {
 
 frappe.ui.form.on("Subcontracting", {
     company: function (frm) {
-        frappe.call({
-            method: 'update_company_address',
-            doc: frm.doc,
-            callback: function (r) {
-                refresh_field(["company_address","company_gstin"])
-            }
-        });
+        // frappe.call({
+        //     method: 'update_company_address',
+        //     doc: frm.doc,
+        //     callback: function (r) {
+        //         refresh_field(["company_address","company_gstin"])
+        //     }
+        // });
+        get_address(frm, "Company", frm.doc.company, 'company_address', 'comp_address');
     }
 });
 
+function get_address(frm, Doctype, DocName, AddressFieldName, DetailsFieldName){
+    frappe.call({
+        method: 'get_address',
+        doc: frm.doc,
+        args: {
+            Doctype: Doctype,
+            DocName: DocName,
+        },
+        callback: function(resp){
+            if(resp.message){
+                frm.set_value(AddressFieldName, resp.message[0]);
+                frm.set_value(DetailsFieldName, resp.message[1]);
+            }
+        }
+    });
+}
+
 frappe.ui.form.on("Subcontracting", {
     supplier_id: function (frm) {
-        frappe.call({
-            method: 'update_supplier_address',
-            doc: frm.doc,
-            callback: function (r) {
-                refresh_field(["company_address","company_gstin"])
-            }
-        });
+        // frappe.call({
+        //     method: 'update_supplier_address',
+        //     doc: frm.doc,
+        //     callback: function (r) {
+        //         refresh_field(["company_address","company_gstin"])
+        //     }
+        // });
+        get_address(frm, "Supplier", frm.doc.supplier_id, 'supplier_address', 'sup_adderss');
     }
 });
 
