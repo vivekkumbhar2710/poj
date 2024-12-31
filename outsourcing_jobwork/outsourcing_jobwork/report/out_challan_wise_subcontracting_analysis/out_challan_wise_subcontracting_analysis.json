@@ -1,29 +1,30 @@
 {
  "add_total_row": 0,
  "columns": [],
- "creation": "2024-05-24 13:15:33.901881",
+ "creation": "2024-07-26 10:35:00.764035",
  "disable_prepared_report": 0,
- "disabled": 1,
+ "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "",
- "modified": "2024-07-26 10:37:24.388373",
+ "modified": "2024-07-26 10:35:00.764035",
  "modified_by": "Administrator",
  "module": "Outsourcing JobWork",
- "name": "Challan Wise Subcontracting Analysis",
- "owner": "abub.patel@erpdata.in",
+ "name": "Out Challan Wise Subcontracting Analysis",
+ "owner": "Administrator",
  "prepared_report": 0,
- "query": "",
- "ref_doctype": "Subcontracting",
- "report_name": "Challan Wise Subcontracting Analysis",
- "report_script": "",
+ "ref_doctype": "DocType",
+ "report_name": "Out Challan Wise Subcontracting Analysis",
  "report_type": "Script Report",
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "Administrator"
   }
  ]
 }

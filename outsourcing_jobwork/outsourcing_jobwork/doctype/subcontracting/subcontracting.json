@@ -120,7 +120,8 @@
   "driver_name",
   "lr_date",
   "gst_vehicle_type",
-  "customer_name"
+  "customer_name",
+  "custom_foundry_rejection_analaysis"
  ],
  "fields": [
   {
@@ -305,6 +306,7 @@
    "fieldname": "in_raw_item_subcontracting",
    "fieldtype": "Table",
    "label": "IN Raw Item Subcontracting",
+   "mandatory_depends_on": "doc.in_or_out === 'IN';",
    "options": "IN Raw Item Subcontracting"
   },
   {
@@ -766,6 +768,13 @@
   {
    "fieldname": "section_break_rosyi",
    "fieldtype": "Section Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "custom_foundry_rejection_analaysis",
+   "fieldtype": "Check",
+   "label": "Foundry Rejection Analysis"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -776,7 +785,7 @@
    "link_fieldname": "custom_subcontracting"
   }
  ],
- "modified": "2024-05-31 22:09:20.390917",
+ "modified": "2024-07-26 16:27:42.606934",
  "modified_by": "Administrator",
  "module": "Outsourcing JobWork",
  "name": "Subcontracting",

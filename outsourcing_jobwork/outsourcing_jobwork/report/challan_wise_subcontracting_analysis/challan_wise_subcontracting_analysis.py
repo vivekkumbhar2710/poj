@@ -12,6 +12,7 @@ def get_col(filters):
         {"fieldname": "Against", "fieldtype": "Link", "label": "OUT Challan Against IN", "options":"Subcontracting"},
         {"fieldname": "subcontracting", "fieldtype": "Link", "label": "IN Challan", "options":"Subcontracting"},
         {"fieldname": "raw_item_code", "fieldtype": "Data", "label": "Raw Item Code"},
+        {"fieldname": "raw_item_name", "fieldtype": "Data", "label": "Raw Item Name"},
         {"fieldname": "supplier_name", "fieldtype": "Data", "label": "Supplier Name"},
         {"fieldname": "opening_qty", "fieldtype": "Data", "label": "Opening QTY"},
         {"fieldname": "production_out_quantity", "fieldtype": "Data", "label": "Dispatch QTY"},
@@ -41,7 +42,7 @@ def get_data(filters):
 
     sql_query = """
                 SELECT sc.name, NULL AS subcontracting,NULL AS Against,sc.name AS sort, sc.posting_date AS Date, sc.target_warehouse AS warehouse, sc.supplier_name,
-                bos.raw_item_code, 0 AS ok_quantity, 0 AS cr_quantity, 0 AS mr_quantity,
+                bos.raw_item_code, bos.raw_item_name, 0 AS ok_quantity, 0 AS cr_quantity, 0 AS mr_quantity,
                 0 AS as_it_is_quantity, 0 AS rw_quantity, 0 AS production_quantity, 
                 bos.production_quantity AS production_out_quantity, bos.weight_per_unit, 0 AS production_remaining_quantity
                 FROM `tabSubcontracting` AS sc
@@ -49,7 +50,7 @@ def get_data(filters):
                 WHERE sc.in_or_out = 'OUT' AND sc.company = %s AND DATE(sc.posting_date) BETWEEN %s AND %s AND sc.docstatus = 1 {condition}
                 UNION ALL
                 SELECT NULL AS name, sc.name AS subcontracting,bos.subcontracting AS Against,sc.name AS sort, sc.posting_date AS Date, sc.target_warehouse AS warehouse, sc.supplier_name,
-                bos.raw_item_code, bos.ok_quantity AS ok_quantity, bos.cr_quantity AS cr_quantity, bos.mr_quantity AS mr_quantity,
+                bos.raw_item_code, bos.raw_item_name, bos.ok_quantity AS ok_quantity, bos.cr_quantity AS cr_quantity, bos.mr_quantity AS mr_quantity,
                 bos.as_it_is_quantity AS as_it_is_quantity, bos.rw_quantity AS rw_quantity, 0 AS production_quantity, 
                 0 AS production_out_quantity, bos.weight_per_unit, 0 AS production_remaining_quantity
                 FROM `tabSubcontracting` AS sc
@@ -62,14 +63,9 @@ def get_data(filters):
     if name:
         conditions.append("sc.name = %s")
         params.append(name)
-    # if subcontracting:
-    #     conditions.append("bos.subcontracting = %s")
-    #     params.append(subcontracting)
     params = params + [comp, from_date, to_date]
     if name:
         params.append(name)
-    # if subcontracting:
-    #     params.append(subcontracting)
     cond = " AND " + " AND ".join(conditions) if conditions else ""
     sql_query = sql_query.format(condition = cond)
     data = frappe.db.sql(sql_query, tuple(params), as_dict=True)
@@ -120,7 +116,7 @@ def get_all_available_quantity(item_code, warehouse, filters):
 
 sql_query = """
         SELECT sc.name, bos.subcontracting, sc.posting_date AS Date, sc.source_warehouse AS warehouse, sc.supplier_name,
-               bos.raw_item_code, bos.ok_quantity, bos.cr_quantity, bos.mr_quantity,
+               bos.raw_item_code, bos.raw_item_name, bos.ok_quantity, bos.cr_quantity, bos.mr_quantity,
                bos.as_it_is_quantity, bos.rw_quantity, 
                (bos.ok_quantity + bos.cr_quantity + bos.mr_quantity + bos.as_it_is_quantity + bos.rw_quantity) AS production_quantity,
                bos.production_out_quantity, bos.weight_per_unit, 0 AS production_remaining_quantity
@@ -131,7 +127,7 @@ sql_query = """
         UNION ALL
         
         SELECT sc.name, NULL AS subcontracting, sc.posting_date AS Date, sc.target_warehouse AS warehouse, sc.supplier_name,
-               bos.raw_item_code, 0 AS ok_quantity, 0 AS cr_quantity, 0 AS mr_quantity,
+               bos.raw_item_code, bos.raw_item_name, 0 AS ok_quantity, 0 AS cr_quantity, 0 AS mr_quantity,
                0 AS as_it_is_quantity, 0 AS rw_quantity, 0 AS production_quantity, 
                bos.production_quantity AS production_out_quantity, bos.weight_per_unit, 0 AS production_remaining_quantity
         FROM `tabSubcontracting` AS sc

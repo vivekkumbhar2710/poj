@@ -13,12 +13,23 @@
   "naming_series",
   "column_break_3vvb3",
   "date",
+  "column_break_a6ivm",
+  "return_against",
+  "section_break_beind",
+  "customer",
+  "column_break_ycfet",
+  "customer_name",
+  "column_break_8sep7",
+  "supplier",
+  "column_break_oojbn",
+  "supplier_name",
   "select_purpose_section",
   "purpose",
   "operator_id",
   "column_break_evg7p",
   "type",
   "operator_name",
+  "vehicle_no",
   "set_warehouses_section",
   "set_source_warehouse",
   "column_break_owb0t",
@@ -134,6 +145,61 @@
    "fieldname": "operator_name",
    "fieldtype": "Data",
    "label": "Operator Name"
+  },
+  {
+   "fieldname": "column_break_a6ivm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "return_against",
+   "fieldtype": "Check",
+   "label": "Return Against"
+  },
+  {
+   "fieldname": "section_break_beind",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_ycfet",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "column_break_8sep7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "column_break_oojbn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "label": "Vehicle No"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -144,7 +210,7 @@
    "link_fieldname": "custom_material_movement"
   }
  ],
- "modified": "2024-05-04 17:17:24.147757",
+ "modified": "2024-09-28 16:08:16.489291",
  "modified_by": "Administrator",
  "module": "Outsourcing JobWork",
  "name": "Material Movement",

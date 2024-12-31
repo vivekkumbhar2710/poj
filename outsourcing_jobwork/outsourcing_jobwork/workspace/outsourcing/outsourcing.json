@@ -1,53 +1,53 @@
 {
-    "charts": [],
-    "content": "[{\"id\":\"pHMuOhVfUm\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Outsourcing</span>\",\"col\":12}},{\"id\":\"TKfyrPyRBV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing Job Work\",\"col\":3}},{\"id\":\"TgUZahMk-w\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing Rejection Reason\",\"col\":3}},{\"id\":\"Oc78Qod-bQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing BOM\",\"col\":3}}]",
-    "creation": "2024-01-06 12:53:20.698545",
-    "custom_blocks": [],
-    "docstatus": 0,
-    "doctype": "Workspace",
-    "for_user": "",
-    "hide_custom": 0,
-    "icon": "branch",
-    "idx": 0,
-    "is_hidden": 0,
-    "label": "Outsourcing",
-    "links": [],
-    "modified": "2024-04-05 14:48:04.567024",
-    "modified_by": "Administrator",
-    "module": "Outsourcing JobWork",
-    "name": "Outsourcing",
-    "number_cards": [],
-    "owner": "vivek.kumbhar@erpdata.in",
-    "parent_page": "ERPNext Integrations",
-    "public": 1,
-    "quick_lists": [],
-    "roles": [],
-    "sequence_id": 35.0,
-    "shortcuts": [
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Outsourcing Job Work",
-      "link_to": "Outsourcing Job Work",
-      "stats_filter": "[]",
-      "type": "DocType"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Outsourcing Rejection Reason",
-      "link_to": "Outsourcing Rejection Reason",
-      "stats_filter": "[]",
-      "type": "DocType"
-     },
-     {
-      "color": "Grey",
-      "doc_view": "List",
-      "label": "Outsourcing BOM",
-      "link_to": "Outsourcing BOM",
-      "stats_filter": "[]",
-      "type": "DocType"
-     }
-    ],
-    "title": "Outsourcing"
-   }
+ "charts": [],
+ "content": "[{\"id\":\"pHMuOhVfUm\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Outsourcing</span>\",\"col\":12}},{\"id\":\"TKfyrPyRBV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing Job Work\",\"col\":3}},{\"id\":\"TgUZahMk-w\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing Rejection Reason\",\"col\":3}},{\"id\":\"Oc78Qod-bQ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Outsourcing BOM\",\"col\":3}}]",
+ "creation": "2024-01-06 12:53:20.698545",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "branch",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Outsourcing",
+ "links": [],
+ "modified": "2024-08-21 14:45:16.921283",
+ "modified_by": "prasad@pepl.com",
+ "module": "Outsourcing JobWork",
+ "name": "Outsourcing",
+ "number_cards": [],
+ "owner": "vivek.kumbhar@erpdata.in",
+ "parent_page": "ERPNext Integrations",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 35.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Outsourcing Job Work",
+   "link_to": "Outsourcing Job Work",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Outsourcing Rejection Reason",
+   "link_to": "Outsourcing Rejection Reason",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Outsourcing BOM",
+   "link_to": "Outsourcing BOM",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Outsourcing"
+}

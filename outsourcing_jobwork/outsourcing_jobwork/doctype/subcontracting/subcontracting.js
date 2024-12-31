@@ -93,21 +93,14 @@ function method_call_method(frm, party, party_type) {
 }
 
 
-frappe.ui.form.on('Subcontracting', {
-    supplier_id: function(frm) {
-        if (frm.doc.supplier_id) {
-            // frm.set_query("supplier_address", function() { // Replace with the name of the link field
-            //     return {
-            //         filters: [
-            //             ["Dynamic Link", "link_doctype", "=", 'Supplier'],
-            //             ["Dynamic Link", "link_name", "=", frm.doc.supplier],
-            //         ]
-            //     };
-            // });
-            method_call_method(frm, frm.doc.supplier_id, 'Supplier');
-        }
-    },
-});
+// frappe.ui.form.on('Subcontracting', {
+//     supplier_id: function(frm) {
+//         if (frm.doc.supplier_id) {
+
+//             method_call_method(frm, frm.doc.supplier_id, 'Supplier');
+//         }
+//     },
+// });
 
 
 // ================================================================================== ALL ================================================================================== 
@@ -389,6 +382,10 @@ frappe.ui.form.on("Subcontracting", {
         set_field_filter(frm);
         set_table_filter(frm);
         set_out_sub_list(frm);
+        if (frm.doc.supplier_id) {
+
+            method_call_method(frm, frm.doc.supplier_id, 'Supplier');
+        }
 
     },
 

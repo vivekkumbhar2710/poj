@@ -10,17 +10,31 @@ class MaterialMovement(Document):
 	def available_qty(self):
 		for row in self.get("items"):
 			if row.source_warehouse and row.item_code:
-				doc_name = frappe.get_value('Bin',{'item_code':row.item_code,'warehouse': row.source_warehouse}, "actual_qty")
-				row.available_qty = doc_name
+				available_qty = frappe.get_value('Bin',{'item_code':row.item_code,'warehouse': row.source_warehouse}, "actual_qty")
+				row.available_qty = available_qty
+			# if row.qty and row.rate:
+			# 	row.amount = row.qty * row.rate
  
- 
- 
+	# @frappe.whitelist()
+	# def set_party_name(self):
+	# 	if self.party:
+	# 		if self.party_type == "Customer":
+	# 			field = 'customer_name'
+	# 		elif self.party_type == "Supplier":
+	# 			field = 'supplier_name'
+	# 		self.party_name = frappe.db.get_value(self.party_type, {"name": self.party}, field)
+
 	def on_submit(self):
-		self.material_transfer()
+		entry_type = "Material Transfer" if self.return_against else "Material Receipt"
+		if entry_type == "Material Transfer":
+			for i in self.items:
+				if not i.source_warehouse:
+					frappe.throw("Source Warehouse Is Mandatory")
+		self.material_transfer(entry_type)
   
-	def material_transfer(self):	
+	def material_transfer(self,entry_type):	
 		doc = frappe.new_doc("Stock Entry")
-		doc.stock_entry_type = "Material Transfer"
+		doc.stock_entry_type = entry_type
 		doc.company = self.company
 		doc.set_posting_time = True
 		doc.posting_date =self.date

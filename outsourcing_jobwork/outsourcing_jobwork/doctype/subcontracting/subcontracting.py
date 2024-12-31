@@ -46,6 +46,8 @@ class Subcontracting(Document):
 				self.stock_transfer_stock_entry('in_rejected_items_reasons_subcontracting' , 'raw_item_code' , 'quantity' , 'source_warehouse' , 'target_warehouse')
 				self.update_out_entry()
 
+			self.set_foundry_rejection_analysis()
+
 	def before_cancel(self):
 		self.cancel_update_out_entry()
 		self.loan_cancel_update_out_entry()
@@ -190,7 +192,7 @@ class Subcontracting(Document):
 									SELECT a.name name, b.raw_item_code ,b.production_quantity ,b.production_done_quantity , b.name reference_id , b.subcontracting_operations
 									FROM `tabSubcontracting` a
 									LEFT JOIN `tabItems Subcontracting` b ON a.name = b.parent
-									WHERE a.supplier_id = %s AND a.company = %s AND b.docstatus = 1 AND b.parentfield = 'items_subcontracting' AND b.out_done = 0
+									WHERE a.supplier_id = %s AND a.company = %s AND b.docstatus = 1 AND b.parentfield = 'items_subcontracting' AND b.out_done = 0 AND a.in_or_out = 'Out'
 						"""
 
 				paremeters = [supplier_id , company]
@@ -663,6 +665,10 @@ class Subcontracting(Document):
 		result_dict = {}
 		out_raw_dict = {}
 
+		raw_data = self.get("in_raw_item_subcontracting")
+		if not raw_data:
+			frappe.throw("'In Raw Item Subcontrating' table is mandatory when you are inwording the items there is no data in table this happends due to slow network or any server problem, just repeat the process one more time")
+
 		for j in self.get("in_raw_item_subcontracting"):
 			raw_item_code, quantity = j.raw_item_code, j.quantity
 
@@ -1064,3 +1070,9 @@ class Subcontracting(Document):
 	def update_raw_list(self, child_table, field):
 		for i in self.get(child_table, filters={field:0}):
 			self.get(child_table).remove(i)
+
+	def set_foundry_rejection_analysis(self):
+		if self.in_or_out == 'IN':
+			data = self.get('in_rejected_items_reasons_subcontracting')
+			if not data:
+				self.custom_foundry_rejection_analaysis = 1
